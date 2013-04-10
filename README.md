@@ -3,7 +3,8 @@ tasksched
 
 HackerRank's Task Scheduling Problem
 
-# This is a problem from hackerrank:
+This is a problem from hackerrank:
+----------------------------------
 
 You have a long list of tasks that you need to do today. Task i is specified by the deadline by which you have to complete it (Di) and the number of minutes it will take you to complete the task (Mi). You need not complete a task at a stretch. You can complete a part of it, switch to another task and then switch back.
 
@@ -52,3 +53,20 @@ iteration, so it will take O((n^2)log(n)) in total, which is unacceptable: a sol
 in Python only has 16 seconds to solve the problem. So a more efficient solution is
 needed. This is turns out to be quite hard.
 
+The key difficulty is that when inserting a new task, all tasks that follows the newly
+inserted task must have their completion time (and overtime) updated. That is the
+part that causes the O(n^2) behavior. It turns out that there is a data structure
+to do this efficiently, it is called a Binary Indexed Tree [http://community.topcoder.com/tc?module=Static&d1=tutorials&d2=binaryIndexedTrees]. Secondly, we also need
+to keep track of the max overtime for three ranges, the tasks before the new tasks, the
+new task itself, and tasks after the new task. This problem is known as the
+"range-minimum-query" and a data structure called Segment Tree is used to do it. [http://wcipeg.com/wiki/Segment_tree].
+
+Files:
+------
+
+tasksched.py:              Naive implemention that sorts data every round
+tasksched_fast.py:         Fast implemention using Binary Indexed Tree and Segment Tree.
+tasksched_hackrank.py:     Optimized Python (Removed small functions and lambdas)
+tasksched_tester.py:       Generates test cases
+bitree.py:                 Binary Indexed Tree
+segtree.py:                Segment Tree
